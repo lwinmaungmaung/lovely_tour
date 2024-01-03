@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('tours', function (Blueprint $table) {
             $table->id();
-            $table->enum('title', ['mr', 'ms', 'mrs', 'dr', 'none'])->default('none');
             $table->string('name');
-            $table->string('email');
-            $table->string('mobile');
+            $table->string('description')->nullable();
+            $table->string('image')->nullable();
+            $table->unsignedBigInteger('price_per_pax')->default(0);
+            $table->unsignedInteger('min_pax_booking')->default(1);
             $table->timestamps();
         });
     }
@@ -26,6 +27,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('tours');
+        Schema::enableForeignKeyConstraints();
     }
 };

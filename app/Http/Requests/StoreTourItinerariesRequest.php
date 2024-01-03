@@ -5,14 +5,14 @@ namespace App\Http\Requests;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUserRequest extends FormRequest
+class StoreTourItinerariesRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Auth::user()->user_level === 'admin';
+        return Auth::user()->user_level==='admin';
     }
 
     /**
@@ -23,10 +23,11 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'begin' => 'required|date_format:H:i',
+            'end' => 'nullable|date_format:H:i',
             'name' => 'required|string',
-            'email' => 'required|email',
-            'password'=> 'required|confirmed',
-            'user_level' => 'required|in:admin,editor,user'
+            'description' => 'required|string',
+            'type' => "nullable",
         ];
     }
 }

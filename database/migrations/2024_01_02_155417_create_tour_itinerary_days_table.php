@@ -11,12 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('tour_itinerary_days', function (Blueprint $table) {
             $table->id();
-            $table->enum('title', ['mr', 'ms', 'mrs', 'dr', 'none'])->default('none');
-            $table->string('name');
-            $table->string('email');
-            $table->string('mobile');
+            $table->foreignId('tour_id')->references('id')->on('tours')->cascadeOnDelete();
+            $table->string('header')->nullable();
+            $table->unsignedInteger('position')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('customers');
+        Schema::dropIfExists('tour_itinerary_days');
     }
 };

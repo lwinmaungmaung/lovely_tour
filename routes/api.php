@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Resources\UserResource;
-use Illuminate\Http\Request;
+use App\Http\Controllers\TourController;
+use App\Http\Controllers\TourItineraryController;
+use App\Http\Controllers\TourItineraryDayController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::name('post_login')->post('/', [AdminController::class, 'postLogin']);
 Route::middleware('auth:api')->group(function (){
-   Route::name('user')->get('/user',function(){
-       return new UserResource(Auth::user());
-   });
+    Route::apiResource('user', UserController::class);
+    Route::apiResource('tour', TourController::class);
+    Route::apiResource('tour.day', TourItineraryDayController::class);
+    Route::apiResource('tour.day.itinerary', TourItineraryController::class);
 });

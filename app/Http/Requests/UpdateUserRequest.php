@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Couchbase\Role;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return \Auth::user()->user_level==='admin';
     }
 
     /**
@@ -22,7 +24,10 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['required', 'string'],
+            'email' => ['required','email',Rule::unique('users')->ignore($this->route()->user->id)],
+            'password' => ['required', 'confirmed'],
+
         ];
     }
 }
