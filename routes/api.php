@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TourItineraryController;
 use App\Http\Controllers\TourItineraryDayController;
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::post('/book', [FrontController::class, 'book']);
 
 Route::name('post_login')->post('/', [AdminController::class, 'postLogin']);
 Route::middleware('auth:api')->group(function (){
