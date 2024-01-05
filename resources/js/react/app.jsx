@@ -7,7 +7,7 @@ import ErrorPage from "./Page/errorPage.jsx";
 import Tour from "./Page/Tour/Tour.jsx";
 import DisplayArea from "./component/DisplayArea.jsx";
 import TourDetail, {TourLoader, updateTourAction} from "./Page/Tour/TourDetail.jsx";
-import CreateTour, {createTourAction} from "./Page/Tour/createTour.jsx";
+import CreateTour, {createTourAction} from "./Page/Tour/CreateTour.jsx";
 import ItineraryDayIndex from "./Page/ItineraryDays/ItineraryDayIndex.jsx";
 import CreateItineraryDay, {createItineraryDayAction} from "./Page/ItineraryDays/CreateItineraryDay.jsx";
 import EditItineraryDay, {
