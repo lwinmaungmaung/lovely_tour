@@ -17,7 +17,7 @@
     </head>
     <body class="antialiased">
     @viteReactRefresh
-    @vite('resources/js/react/app.jsx')
+    @vite(['resources/js/react/app.jsx'])
     <div id="app"></div>
     </body>
 </html>
