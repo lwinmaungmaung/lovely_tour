@@ -18,6 +18,7 @@ import CreateItinerary, {createItineraryAction} from "./Page/Itineraries/CreateI
 import Login, {loginAction} from "./Page/Login.jsx";
 import Booking from "./Page/Booking.jsx";
 import BookingDetail, {bookAction, PublicTourLoader} from "./Page/BookingDetail.jsx";
+import BookingIndex from "./Page/Bookings/BookingIndex.jsx";
 
 
 
@@ -71,7 +72,7 @@ const router = createBrowserRouter([
 
             {
                 path: '/admin/booking',
-                element: <DisplayArea/>
+                element: <BookingIndex/>
             }
         ]
     },

@@ -14,6 +14,9 @@ class Customer extends Model
         'name',
         'email',
         'mobile',
-
     ];
+
+    public function Bookings(){
+        return $this->hasMany(Booking::class, 'customer_id', 'id');
+    }
 }

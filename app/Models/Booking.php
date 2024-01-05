@@ -16,4 +16,7 @@ class Booking extends Model
         'children',
         'special_instruction',
     ];
+    public function customer(){
+        $this->hasOne(Customer::class, 'customer_id', 'id');
+    }
 }
