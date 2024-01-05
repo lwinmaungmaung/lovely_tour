@@ -3,10 +3,13 @@ import {getTours,deleteTour} from "../../lib/TourHelper.js";
 import {Link} from "react-router-dom";
 
 function TourRow(props) {
+    const deleteItem = props.deleteItem
+    const index = props.index
     const tour = props.tour
     const handleDelete = (e) => {
         e.preventDefault()
         deleteTour(tour.id)
+        deleteItem(index)
     }
     return(
         <tr>
@@ -30,9 +33,17 @@ export default function Tour(){
             setTours(tours)
         }).catch(error => error);
     }, []);
+
+    function handleDelete (index) {
+        console.log(index)
+        let update_tours = [...tours]
+        update_tours.splice(index, 1)
+        setTours(update_tours);
+    }
     return(
         <>
-            <h1 className={"h1"}>Tours</h1>
+            <h1 className={"h1"}>Tours </h1>
+            <Link to={'/tour/create'}>Create Tour</Link>
             <table className="table">
                 <thead>
                 <tr>
@@ -45,7 +56,7 @@ export default function Tour(){
                 </thead>
                 <tbody>
                 {tours.map((tour,index) => {
-                    return <TourRow key={index} tour={tour} />
+                    return <TourRow key={index} index={index} tour={tour} deleteItem={handleDelete}/>
                 } )}
 
 

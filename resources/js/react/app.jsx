@@ -9,6 +9,7 @@ import ErrorPage from "./Page/errorPage.jsx";
 import Tour from "./Page/Tour/Tour.jsx";
 import DisplayArea from "./component/DisplayArea.jsx";
 import TourDetail, {TourLoader, updateTourAction} from "./Page/Tour/TourDetail.jsx";
+import CreateTour, {createTourAction} from "./Page/Tour/createTour.jsx";
 
 
 export default function Home() {
@@ -43,6 +44,11 @@ const router = createBrowserRouter([
                 loader: TourLoader,
                 action: updateTourAction,
                 element: <TourDetail/>
+            },
+            {
+                path: '/tour/create',
+                element: <CreateTour/>,
+                action: createTourAction,
             },
             {
                 path: '/tour',

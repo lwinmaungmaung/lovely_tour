@@ -24,6 +24,33 @@ export function getTours() {
 
 }
 
+export function createTour(updates) {
+    const token = localStorage.getItem('token');
+    let config = {
+        headers: {
+            'Authorization': 'Bearer ' + token,
+            'Accept': 'application/json'
+        }
+    }
+    return new Promise((resolve, reject) => {
+        axios.post(
+            '/api/tour/', updates, config)
+            .then((response) => {
+                    console.log(response.data)
+                    return response.data
+
+                }
+            ).then(data => {
+            resolve(data.data)
+        })
+            .catch(error => {
+                console.log("error")
+                console.log(error)
+                reject(error)
+            });
+    })
+}
+
 export function getTour(tourId) {
 
     const token = localStorage.getItem('token');
