@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::name('login')->get('/',function (){
-    return '';
-});
+Route::name('login')->any('/{any}',function (){
+    return view('welcome');
+})->where('any', '.*');
