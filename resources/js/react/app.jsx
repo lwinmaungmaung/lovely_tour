@@ -1,8 +1,6 @@
 import {createRoot} from "react-dom/client";
-import {useEffect, useState} from "react";
 import React from "react";
-import axios from "axios";
-import {getProfile, isLoggedIn} from "./lib/userHelper.js";
+import {isLoggedIn} from "./lib/userHelper.js";
 import Dashboard from "./Dashboard.jsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import ErrorPage from "./Page/errorPage.jsx";
@@ -10,57 +8,84 @@ import Tour from "./Page/Tour/Tour.jsx";
 import DisplayArea from "./component/DisplayArea.jsx";
 import TourDetail, {TourLoader, updateTourAction} from "./Page/Tour/TourDetail.jsx";
 import CreateTour, {createTourAction} from "./Page/Tour/createTour.jsx";
+import ItineraryDayIndex from "./Page/ItineraryDays/ItineraryDayIndex.jsx";
+import CreateItineraryDay, {createItineraryDayAction} from "./Page/ItineraryDays/CreateItineraryDay.jsx";
+import EditItineraryDay, {
+    ItineraryDayLoader,
+    updateItineraryDayAction
+} from "./Page/ItineraryDays/EditItineraryDay.jsx";
+import CreateItinerary, {createItineraryAction} from "./Page/Itineraries/CreateItinerary.jsx";
+import Login, {loginAction} from "./Page/Login.jsx";
+import Booking from "./Page/Booking.jsx";
+import BookingDetail, {bookAction, PublicTourLoader} from "./Page/BookingDetail.jsx";
 
 
-export default function Home() {
-    const [token, setToken] = useState([]);
 
-    const login = () => {
-        axios.post('/api/login', {'email': 'admin@admin.com', 'password': 'password'})
-            .then((response) =>
-                response.data
-            ).then(data => {
-            localStorage.setItem('token', data.access_token)
-            window.location.reload(false);
-        })
-            .catch(error => console.log(error));
-    }
-    return (
-        <div>
-            <button onClick={login}>Click to login</button>
-        </div>
-    );
-}
 
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        path: "/admin",
         element: <Dashboard/>,
         errorElement: <ErrorPage/>,
         children: [
             {
-                path: '/tour/:tourId',
+                path: '/admin/tour/:tourId/ItineraryDays/:itineraryDayId/itinerary/create',
+                loader: ItineraryDayLoader,
+                action: createItineraryAction,
+                element: <CreateItinerary/>
+            },
+            {
+                path: '/admin/tour/:tourId/ItineraryDays',
+                loader: TourLoader,
+                element: <ItineraryDayIndex/>
+            },
+            {
+                path: '/admin/tour/:tourId/ItineraryDays/create',
+                loader: TourLoader,
+                action: createItineraryDayAction,
+                element: <CreateItineraryDay/>
+            },
+            {
+                path: '/admin/tour/:tourId/ItineraryDays/:itineraryDayId',
+                loader: ItineraryDayLoader,
+                action: updateItineraryDayAction,
+                element: <EditItineraryDay/>
+            },
+            {
+                path: '/admin/tour/:tourId',
                 loader: TourLoader,
                 action: updateTourAction,
                 element: <TourDetail/>
             },
             {
-                path: '/tour/create',
+                path: '/admin/tour/create',
                 element: <CreateTour/>,
                 action: createTourAction,
             },
             {
-                path: '/tour',
+                path: '/admin/tour',
                 element: <Tour/>,
             },
 
+
             {
-                path: '/booking',
+                path: '/admin/booking',
                 element: <DisplayArea/>
             }
         ]
-    }
+    },
+    {
+        path: '/booking/:tourId',
+        loader: PublicTourLoader,
+        action: bookAction,
+        element:<BookingDetail/>
+    },
+    {
+        path:'/',
+        element:<Booking/>
+    },
+
 ]);
 
 document.body.innerHTML = '<div id="app"></div>';
@@ -73,6 +98,6 @@ if (isLoggedIn()) {
     )
 
 } else {
-    root.render(<Home/>);
+    root.render(<Login/>);
 }
 

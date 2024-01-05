@@ -54,6 +54,6 @@ class TourItineraryDayController extends Controller
     public function destroy(Tour $tour, TourItineraryDay $day)
     {
         $day->delete();
-        return response()->json(['message' => 'tour itinerary day deleted successfully.'],410);
+        return response()->json(['message' => 'tour itinerary day deleted successfully.']);
     }
 }

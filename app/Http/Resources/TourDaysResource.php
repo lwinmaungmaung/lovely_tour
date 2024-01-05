@@ -18,7 +18,8 @@ class TourDaysResource extends JsonResource
             'id' => $this->id,
             'tour_id' => $this->tour_id,
             'header' => $this->header,
-            'position' => $this->position
+            'position' => $this->position,
+            'itineraries_count' => $this->itineraries()->count()
         ];
     }
 }

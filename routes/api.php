@@ -20,8 +20,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('/public')->group(function () {
+    Route::get('/tour', [FrontController::class, 'getTours'])->name('tours');
+    Route::get('/tour/{tour}', [FrontController::class, 'getTour'])->name('tours.detail');
+    Route::post('/book', [FrontController::class, 'book']);
+});
 
-Route::post('/book', [FrontController::class, 'book']);
 
 Route::name('post_login')->post('/login', [AdminController::class, 'postLogin']);
 Route::middleware('auth:api')->group(function (){

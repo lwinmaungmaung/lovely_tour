@@ -23,9 +23,6 @@ export function isLoggedIn() {
                 reject(false)
             });
     })
-
-    console.log("result", result);
-    return result;
 }
 
 export function getProfile() {

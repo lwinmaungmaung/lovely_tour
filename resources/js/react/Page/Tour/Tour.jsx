@@ -18,8 +18,10 @@ function TourRow(props) {
             <td>{tour.price_per_pax}</td>
             <td>{tour.min_pax_booking}</td>
             <td>
-                <Link to={'/tour/'+tour.id}>Edit</Link>
-                &nbsp;
+                <Link to={'/admin/tour/'+tour.id+'/itineraryDays'}>Itineraries</Link>
+                <br/>
+                <Link to={'/admin/tour/'+tour.id}>Edit</Link>
+                <br/>
                 <button onClick={handleDelete}>Delete</button>
             </td>
         </tr>
@@ -35,7 +37,7 @@ export default function Tour(){
     }, []);
 
     function handleDelete (index) {
-        console.log(index)
+
         let update_tours = [...tours]
         update_tours.splice(index, 1)
         setTours(update_tours);
@@ -43,7 +45,7 @@ export default function Tour(){
     return(
         <>
             <h1 className={"h1"}>Tours </h1>
-            <Link to={'/tour/create'}>Create Tour</Link>
+            <Link to={'/admin/tour/create'}>Create Tour</Link>
             <table className="table">
                 <thead>
                 <tr>

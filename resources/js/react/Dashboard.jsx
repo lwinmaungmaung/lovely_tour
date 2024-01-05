@@ -1,11 +1,11 @@
 import NavLink from "./component/NavLink.jsx";
-import DisplayArea from "./component/DisplayArea.jsx";
-import {Outlet} from "react-router-dom";
+import {Outlet, redirect} from "react-router-dom";
+import {isLoggedIn} from "./lib/userHelper.js";
 
-export default  function Dashboard(){
+export default function Dashboard() {
     return (
         <div className={"row m-3"}>
-            <NavLink />
+            <NavLink/>
             <div id="detail" className={"col-md-8"}>
                 <Outlet/>
             </div>
