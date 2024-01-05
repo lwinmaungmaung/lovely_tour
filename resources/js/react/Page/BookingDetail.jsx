@@ -1,5 +1,5 @@
 import {Form, Link, redirect, useLoaderData} from "react-router-dom";
-import {getPublicTour} from "../lib/PublicHelper.js";
+import {getPublicTour, placeBooking} from "../lib/PublicHelper.js";
 
 export async function PublicTourLoader({params}) {
     const tour = await getPublicTour(params.tourId);
@@ -11,7 +11,7 @@ export async function bookAction({request, params}) {
 
     const formData = await request.formData();
     const updates = Object.fromEntries(formData);
-
+    await placeBooking(updates);
     return redirect(`/booking/${tourId}`);
 
 }
@@ -54,7 +54,7 @@ export default function BookingDetail(){
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleInputName" className="form-label">Phone</label>
-                            <input type="text" name={"phone"} className="form-control" id="exampleInputName"
+                            <input type="text" name={"mobile"} className="form-control" id="exampleInputName"
                                    aria-describedby="nameHelp"/>
                         </div>
                         <div className="mb-3">

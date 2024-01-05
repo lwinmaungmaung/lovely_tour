@@ -47,14 +47,14 @@ export function getPublicTour(tourId) {
 
 }
 
-export function placeBooking(tourId) {
+export function placeBooking(updates) {
     let config = {
         headers: {
             'Accept': 'application/json'
         }
     }
     return new Promise((resolve, reject) => {
-        axios.post('/api/public/book/', config)
+        axios.post('/api/public/book/',updates, config)
             .then((response) =>
                 {
                     console.log(response.data)

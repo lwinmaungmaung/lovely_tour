@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\TourItineraryController;
@@ -36,4 +37,5 @@ Route::middleware('auth:api')->group(function (){
     Route::apiResource('tour', TourController::class);
     Route::apiResource('tour.day', TourItineraryDayController::class);
     Route::apiResource('tour.day.itinerary', TourItineraryController::class);
+    Route::apiResource('booking', BookingController::class);
 });

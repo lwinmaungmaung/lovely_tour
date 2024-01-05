@@ -18,7 +18,7 @@ class FrontController extends Controller
         return new TourResource($tour);
     }
     public function book(CustomerBookingRequest $request){
-        $customer_info = $request->safe()->only(['title','name','email','phone']);
+        $customer_info = $request->safe()->only(['title','name','email','mobile']);
         $booking_info = $request->safe()->only(['tour_id','adult','children','special_instruction']);
         $customer = Customer::updateOrCreate(['email' => $customer_info['email']], $customer_info);
         if($customer){

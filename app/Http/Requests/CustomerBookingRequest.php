@@ -25,7 +25,7 @@ class CustomerBookingRequest extends FormRequest
             'title' => 'required|string',
             'name' => 'required|string',
             'email' => 'required|email',
-            'phone' => 'required|numeric',
+            'mobile' => 'required|string',
             'tour_id' => 'required|integer|exists:tours,id',
             'adult' => 'required|min:1',
             'children' => 'required|min:0',
